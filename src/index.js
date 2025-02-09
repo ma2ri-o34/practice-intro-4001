@@ -1,13 +1,13 @@
-const { Hono } = require("hono");
-const { serve } = require("@hono/node-server");
-const { logger } = require("hono/logger");
-const { html } = require("hono/html");
+const { Hono } = require('hono');
+const { serve } = require('@hono/node-server');
+const { logger } = require('hono/logger');
+const { html } = require('hono/html');
 
 const app = new Hono();
 app.use(logger());
 
-app.get("/", (c) => {
-  const name = c.req.query("name") ?? "ゲスト";
+app.get('/', (c) => {
+  const name = c.req.query('name') ?? 'ゲスト';
   return c.html(html`
     <!doctype html>
     <html>
@@ -17,6 +17,18 @@ app.get("/", (c) => {
       <body>
         <h1>こんにちは！ ${name} さん</h1>
         <p>これは Hono のサンプルアプリケーションです。</p>
+      </body>
+    </html>
+  `);
+});
+
+app.get('/secret', (c) => {
+  return c.html(html`
+    <!doctype html>
+    <html>
+      <body>
+        <h1>秘密のページ</h1>
+        <p>見つけてしまいましたね...</p>
       </body>
     </html>
   `);
